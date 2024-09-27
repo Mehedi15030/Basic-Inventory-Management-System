@@ -8,7 +8,7 @@ namespace Basic_Inventory_Management_System.Models
 
         [Display (Name=" Selling orderdate")]
         public DateTime OrderDate { get; set; }
-        public decimal TotalAmount {  get; set; }
+        public double TotalAmount {  get; set; }
 
         public List<SellingOrderItem> Items { get; set; }
        
