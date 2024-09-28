@@ -48,7 +48,7 @@ namespace Basic_Inventory_Management_System.Controllers
         // GET: Stocks/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Product, "id", "ProfilePictureURL");
+            ViewData["ProductId"] = new SelectList(_context.Product, "id", "name");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace Basic_Inventory_Management_System.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "id", "ProfilePictureURL", stock.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "id", "name", stock.ProductId);
             return View(stock);
         }
 
@@ -82,7 +82,7 @@ namespace Basic_Inventory_Management_System.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "id", "ProfilePictureURL", stock.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "id", "name", stock.ProductId);
             return View(stock);
         }
 
@@ -118,7 +118,7 @@ namespace Basic_Inventory_Management_System.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "id", "ProfilePictureURL", stock.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "id", "name", stock.ProductId);
             return View(stock);
         }
 

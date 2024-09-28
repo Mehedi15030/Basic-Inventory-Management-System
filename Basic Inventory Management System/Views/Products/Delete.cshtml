@@ -11,6 +11,9 @@
     <h4>Product</h4>
     <hr />
     <dl class="row">
+        <div class="form-group">
+            <img class="border-info rounded-circle" style="max-width:100px" id="ProfilePicturePreview" />
+        </div>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.name)
         </dt>
@@ -55,3 +58,11 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#ProfilePictureURL").val();
+        })
+    </script>
+}

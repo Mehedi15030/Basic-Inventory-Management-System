@@ -49,7 +49,7 @@ namespace Basic_Inventory_Management_System.Controllers
         // GET: PurchaseOrderItems/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Product, "id", "ProfilePictureURL");
+            ViewData["ProductId"] = new SelectList(_context.Product, "id", "name");
             ViewData["PurchaseorderId"] = new SelectList(_context.Purchaseorder, "Id", "Id");
             return View();
         }
@@ -67,7 +67,7 @@ namespace Basic_Inventory_Management_System.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "id", "ProfilePictureURL", purchaseOrderItem.ProductId);
+            ViewData["ProductnId"] = new SelectList(_context.Product, "id", "name", purchaseOrderItem.ProductId);
             ViewData["PurchaseorderId"] = new SelectList(_context.Purchaseorder, "Id", "Id", purchaseOrderItem.PurchaseorderId);
             return View(purchaseOrderItem);
         }
@@ -85,7 +85,7 @@ namespace Basic_Inventory_Management_System.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "id", "ProfilePictureURL", purchaseOrderItem.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "id", "name", purchaseOrderItem.ProductId);
             ViewData["PurchaseorderId"] = new SelectList(_context.Purchaseorder, "Id", "Id", purchaseOrderItem.PurchaseorderId);
             return View(purchaseOrderItem);
         }
@@ -122,7 +122,7 @@ namespace Basic_Inventory_Management_System.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Product, "id", "ProfilePictureURL", purchaseOrderItem.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "id", "name", purchaseOrderItem.ProductId);
             ViewData["PurchaseorderId"] = new SelectList(_context.Purchaseorder, "Id", "Id", purchaseOrderItem.PurchaseorderId);
             return View(purchaseOrderItem);
         }
