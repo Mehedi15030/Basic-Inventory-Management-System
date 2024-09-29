@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Basic_Inventory_Management_System.Data;
 using Basic_Inventory_Management_System.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Basic_Inventory_Management_System.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -27,6 +29,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: Products/Details/5
+        [Authorize(Roles = "Manager,Employee,User")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,6 +49,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Manager,Employee")]
         public IActionResult Create()
         {
             ViewData["CatagoryId"] = new SelectList(_context.Catagory, "id", "name");
@@ -55,6 +59,7 @@ namespace Basic_Inventory_Management_System.Controllers
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Manager,Employee")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,name,ProfilePictureURL,description,price,StockQuantity,CatagoryId")] Product product)
@@ -70,6 +75,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Manager,Employee")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,6 +95,7 @@ namespace Basic_Inventory_Management_System.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Manager,Employee")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,name,ProfilePictureURL,description,price,StockQuantity,CatagoryId")] Product product)
@@ -123,6 +130,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,6 +150,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // POST: Products/Delete/5
+        [Authorize(Roles = "Manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
