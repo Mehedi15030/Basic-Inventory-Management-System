@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Basic_Inventory_Management_System.Data;
 using Basic_Inventory_Management_System.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Basic_Inventory_Management_System.Controllers
 {
+    [Authorize]
     public class SellingOrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,12 +22,14 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: SellingOrders
+        [Authorize(Roles = "Manager,Employee,User")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.SellingOrder.ToListAsync());
         }
 
         // GET: SellingOrders/Details/5
+        [Authorize(Roles = "Manager,Employee,User")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +48,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: SellingOrders/Create
+        [Authorize(Roles = "Manager,Employee")]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +57,7 @@ namespace Basic_Inventory_Management_System.Controllers
         // POST: SellingOrders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Manager,Employee")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,OrderDate,TotalAmount")] SellingOrder sellingOrder)
@@ -64,7 +70,7 @@ namespace Basic_Inventory_Management_System.Controllers
             }
             return View(sellingOrder);
         }
-
+        [Authorize(Roles = "Manager,Employee")]
         // GET: SellingOrders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -84,6 +90,7 @@ namespace Basic_Inventory_Management_System.Controllers
         // POST: SellingOrders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Manager,Employee")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,TotalAmount")] SellingOrder sellingOrder)
@@ -117,6 +124,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: SellingOrders/Delete/5
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -133,7 +141,7 @@ namespace Basic_Inventory_Management_System.Controllers
 
             return View(sellingOrder);
         }
-
+        [Authorize(Roles = "Manager")]
         // POST: SellingOrders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Basic_Inventory_Management_System.Data;
 using Basic_Inventory_Management_System.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Basic_Inventory_Management_System.Controllers
 {
+    [Authorize]
     public class PurchaseOrderItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +22,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: PurchaseOrderItems
+        [Authorize(Roles = "Manager,Employee,User")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.PurchaseOrderItem.Include(p => p.Product).Include(p => p.PurchaseOrder);
@@ -27,6 +30,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: PurchaseOrderItems/Details/5
+        [Authorize(Roles = "Manager,Employee,User")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +51,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: PurchaseOrderItems/Create
+        [Authorize(Roles = "Manager,Employee")]
         public IActionResult Create()
         {
             ViewData["ProductId"] = new SelectList(_context.Product, "id", "name");
@@ -57,6 +62,7 @@ namespace Basic_Inventory_Management_System.Controllers
         // POST: PurchaseOrderItems/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Manager,Employee")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,PurchaseorderId,ProductId,Quantity,Price")] PurchaseOrderItem purchaseOrderItem)
@@ -73,6 +79,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: PurchaseOrderItems/Edit/5
+        [Authorize(Roles = "Manager,Employee")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,6 +100,7 @@ namespace Basic_Inventory_Management_System.Controllers
         // POST: PurchaseOrderItems/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Manager,Employee")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,PurchaseorderId,ProductId,Quantity,Price")] PurchaseOrderItem purchaseOrderItem)
@@ -128,6 +136,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // GET: PurchaseOrderItems/Delete/5
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -148,6 +157,7 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
         // POST: PurchaseOrderItems/Delete/5
+        [Authorize(Roles = "Manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
