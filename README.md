@@ -2,8 +2,9 @@
 **Basic Inventory Management System**<br>
 This project is an Basic Inventory Management System built using ASP.NET MVC Core.
 It allows users to manage Catagory,Product,Salesorderitem,PurchaseorderItem,Stock
-inventories by performing CRUD  operations and
-manage Catagory,monitor stock lavel,manage purchase order and sales order.
+inventories by performing CRUD  operations andmanage Catagory,monitor stock lavel,
+manage purchase order and sales order.
+
 
 **Features**<br>
 1.CRUD operations for inventory management (Products, Categories, etc.)<br>
