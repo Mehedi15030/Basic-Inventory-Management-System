@@ -1,9 +1,11 @@
 ﻿using Basic_Inventory_Management_System.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Basic_Inventory_Management_System.Controllers
 {
+    [Authorize]
     public class RoleController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,7 +20,7 @@ namespace Basic_Inventory_Management_System.Controllers
             _roleManager = roleManager;
         }
 
-
+        [Authorize(Roles = "Manager")]
         public IActionResult Index()
         {
             return View();
