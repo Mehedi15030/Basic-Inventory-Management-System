@@ -24,10 +24,10 @@ manage purchase order and sales order.
 7.Program.cs: The entry point for the application.<br>
 
 **Technologies Used**<br>
-1 Language: C# <br>
-2 Framework: ASP .NET Core (version 8) <br>
-3 Database: MSSQL <br>
-4 ORM: Entity Framework, . <br>
+1 Language: C#. <br>
+2 Framework: ASP .NET Core (version 8). <br>
+3 Database: MSSQL. <br>
+4 ORM: Entity Framework. <br>
 5 Frontend JS Library: JQuery, Ajax. <br>
 
 
